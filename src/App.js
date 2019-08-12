@@ -5,9 +5,19 @@ import Footer from './Components/footer'
 
 import {Grid} from '@material-ui/core';
 
-import './App.css';
+import { makeStyles } from '@material-ui/core/styles';
 
+
+import './App.css';
+const useStyles = makeStyles({
+  footer:{
+    paddingTop : "12px",
+    paddingLeft : "12px",
+    paddingRight: "12px",
+  }
+})
 function App() {
+  const classes = useStyles();
   return (
     <Grid
      container
@@ -15,13 +25,12 @@ function App() {
      spacing={3}
      justify="space-evenly"
      alignItems="stretch"
-     height = '100vh'
     >
     <Grid item xs> <Header /></Grid>
     <Grid item xs>  <Bodycomp /></Grid>
     <Grid item xs>  <Bodycomp /></Grid>
     <Grid item xs>  <Bodycomp /></Grid>
-    <Grid item xs> <Footer /></Grid>
+    <Grid className = {classes.footer}> <Footer /></Grid>
      </Grid>
      );
 }
