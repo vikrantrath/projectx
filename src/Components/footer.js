@@ -14,9 +14,6 @@ const useStyles = makeStyles({
   },
   indicator: {
     backgroundColor: 'green',
-  },
-  text:{
-    backgroundColor: 'green',
   }
 });
 
@@ -35,8 +32,7 @@ const Footer = (props)=>{
         aria-label="icon label tabs example"
         textColor = "inherit"
         classes={{
-          indicator: classes.indicator,
-          text : classes.text
+          indicator: classes.indicator
         }}
       >
         <Tab icon={<PhoneIcon />} label="CONTACT US" />

@@ -1,0 +1,4 @@
+{
+    "LoggedIn" :["Resources","Timesheet","Mails","Meetings"],
+    "LoggedOut" :["SignUp","Demos","Plans!"]
+}

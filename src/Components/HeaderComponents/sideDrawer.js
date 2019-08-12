@@ -1,10 +1,12 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import {List ,ListItem, ListItemIcon, ListItemText, Divider, SwipeableDrawer, IconButton} from '@material-ui/core';
+import {List ,ListItem, ListItemIcon, ListItemText, SwipeableDrawer, IconButton} from '@material-ui/core';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
+import { useAppContext } from '../../StateManagement/useAppState';
+import SideBarMenu from '../../Resources/SideBarMenu.json'
 
 const useStyles = makeStyles(theme => ({
     list: {
@@ -25,6 +27,8 @@ const Sidedrawer = (props)=>{
     const [state, setState] = React.useState({
         isOpen : false
       });
+    const loginStatus = useAppContext().state.loginStatus
+
     
       const toggleDrawer = (isOpen) => event => {
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -41,16 +45,7 @@ const Sidedrawer = (props)=>{
           onKeyDown={toggleDrawer(false)}
         >
           <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
+            {(loginStatus?SideBarMenu.LoggedIn:SideBarMenu.LoggedOut).map((text, index) => (
               <ListItem button key={text}>
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                 <ListItemText primary={text} />

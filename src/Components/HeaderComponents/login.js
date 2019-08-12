@@ -3,6 +3,8 @@ import { makeStyles  } from '@material-ui/core/styles';
 import { Button, IconButton, Menu, MenuItem  } from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
+import { useAppContext } from '../../StateManagement/useAppState'
+
 const useStyles = makeStyles(theme => ({
     login: {
       position : 'absolute',
@@ -14,8 +16,8 @@ const Login = (props)=>{
     const classes = useStyles();
     const menuId = 'primary-search-account-menu';
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [isLoggedIn, setIsLoggedIn] = React.useState(false);
     const isMenuOpen = Boolean(anchorEl);
+    const {state,actions} = useAppContext();
 
     function handleProfileMenuOpen(event) {
         setAnchorEl(event.currentTarget);
@@ -23,12 +25,9 @@ const Login = (props)=>{
       
       function handleMenuClose() {
         setAnchorEl(null);
-        setIsLoggedIn(false)
+        actions.logout()
       }
-      function handleLogin() {
-        setIsLoggedIn(true)
-      }
-      
+
       const renderMenu = ()=> {
         return(
         <Menu
@@ -46,8 +45,8 @@ const Login = (props)=>{
       
 
     return <div className={classes.login}>
-        {!isLoggedIn?
-        <Button color="inherit" onClick={handleLogin}>Login</Button>:
+        {!state.loginStatus?
+        <Button color="inherit" onClick={actions.login}>Login</Button>:
         <div>
           <IconButton
               edge="end"
